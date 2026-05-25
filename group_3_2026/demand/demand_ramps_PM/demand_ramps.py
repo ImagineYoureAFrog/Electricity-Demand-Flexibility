@@ -54,3 +54,12 @@ spain_clean["datetime"] = pd.to_datetime(spain_clean["datetime"], errors="coerce
 spain_clean["demand"] = pd.to_numeric(spain_clean["demand"], errors="coerce")
 spain_clean["country"] = "Spain"
 spain_clean = spain_clean[["country", "datetime", "demand"]]
+
+demand_data = pd.concat([france_clean, spain_clean])
+
+demand_data = demand_data.dropna()
+
+demand_data["ramp"] = demand_data.groupby("country")["demand"].diff()
+demand_data["absolute_ramp"] = demand_data["ramp"].abs()
+
+largest_ramps = demand_data.nlargest(10, "absolute_ramp")
