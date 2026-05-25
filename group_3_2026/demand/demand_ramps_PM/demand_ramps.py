@@ -63,3 +63,16 @@ demand_data["ramp"] = demand_data.groupby("country")["demand"].diff()
 demand_data["absolute_ramp"] = demand_data["ramp"].abs()
 
 largest_ramps = demand_data.nlargest(10, "absolute_ramp")
+
+demand_data.to_csv(
+    "group_3_2026/demand/demand_ramps_PM/demand_ramps_results.csv",
+    index=False
+)
+
+largest_ramps.to_csv(
+    "group_3_2026/demand/demand_ramps_PM/largest_demand_ramps.csv",
+    index=False
+)
+
+print("Demand ramp analysis completed")
+print(largest_ramps)
