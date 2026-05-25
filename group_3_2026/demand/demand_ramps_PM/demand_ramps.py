@@ -37,3 +37,13 @@ spain_4 = pd.read_csv(
     header=None,
     usecols=[0, 1]
 )
+spain = pd.concat([spain_1, spain_2, spain_3, spain_4])
+
+france_clean = france[["Date", "Heures", "Consommation"]].copy()
+france_clean["datetime"] = pd.to_datetime(
+    france_clean["Date"].astype(str) + " " + france_clean["Heures"].astype(str),
+    errors="coerce"
+)
+france_clean["demand"] = pd.to_numeric(france_clean["Consommation"], errors="coerce")
+france_clean["country"] = "France"
+france_clean = france_clean[["country", "datetime", "demand"]]
