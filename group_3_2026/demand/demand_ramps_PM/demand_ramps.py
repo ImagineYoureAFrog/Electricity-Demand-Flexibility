@@ -47,3 +47,10 @@ france_clean["datetime"] = pd.to_datetime(
 france_clean["demand"] = pd.to_numeric(france_clean["Consommation"], errors="coerce")
 france_clean["country"] = "France"
 france_clean = france_clean[["country", "datetime", "demand"]]
+
+spain_clean = spain.copy()
+spain_clean.columns = ["datetime", "demand"]
+spain_clean["datetime"] = pd.to_datetime(spain_clean["datetime"], errors="coerce")
+spain_clean["demand"] = pd.to_numeric(spain_clean["demand"], errors="coerce")
+spain_clean["country"] = "Spain"
+spain_clean = spain_clean[["country", "datetime", "demand"]]
